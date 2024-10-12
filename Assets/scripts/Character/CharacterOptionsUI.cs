@@ -6,13 +6,13 @@ using TMPro;
 using UnityEngine.UI;
 using System.Reflection.Emit;
 
-public class UIUpdater : MonoBehaviour
+public class CharacterOptionsUI : MonoBehaviour
 {
     // [SerializeField]
     // private GameObject optionPrefab;
 
-    [SerializeField]
-    private GameObject nextScreen;
+    // [SerializeField]
+    // private GameObject nextScreen;
 
     [SerializeField]
     private CharacterOptions[] characterOptions;
@@ -20,20 +20,18 @@ public class UIUpdater : MonoBehaviour
     [SerializeField]
     private bool OptionsForNext = false;
 
+    private UINavigate navigateComponent;
+
     // Start is called before the first frame update
     void Start()
     {
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void Init()
     {
+        navigateComponent = GetComponent<UINavigate>();
+
         if (characterOptions == null || characterOptions.Length == 0/* || optionPrefab == null*/)
             return;
             
@@ -67,18 +65,18 @@ public class UIUpdater : MonoBehaviour
                 {
                     Button btnComponent = optionGO.GetComponent<Button>();
                     if (btnComponent)
-                        btnComponent.onClick.AddListener(onNext);
+                        btnComponent.onClick.AddListener(navigateComponent.OnNext);
                 }
             }
         }
     }
 
-    public void onNext()
-    {
-        if( !nextScreen)
-            return;
+    // public void onNext()
+    // {
+    //     if( !nextScreen)
+    //         return;
 
-        gameObject.SetActive(false);
-        nextScreen.SetActive(true);
-    }
+    //     gameObject.SetActive(false);
+    //     nextScreen.SetActive(true);
+    // }
 }

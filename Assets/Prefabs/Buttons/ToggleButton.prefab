@@ -66,9 +66,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 8715c68885442f142883f708c1f8c736, type: 3}
+    m_Font: {fileID: 12800000, guid: b4c87f0ff780a504c8933f306336f13d, type: 3}
     m_FontSize: 52
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 5
     m_MaxSize: 52
@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "IT\u30FB\u30B7\u30B9\u30C6\u30E0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5002f4781454c824099e955e259b05ef, type: 2}
-  m_sharedMaterial: {fileID: -8555127627744846515, guid: 5002f4781454c824099e955e259b05ef, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 24859aa71d64733408f714e90198f988, type: 2}
+  m_sharedMaterial: {fileID: -5550416169212926948, guid: 24859aa71d64733408f714e90198f988, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 40
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535

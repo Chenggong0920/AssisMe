@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 8356708457020455483}
   - component: {fileID: 1483445609852205429}
   - component: {fileID: 2226478337273155205}
+  - component: {fileID: 593324218523760638}
   m_Layer: 5
   m_Name: toggleOptions
   m_TagString: Untagged
@@ -355,34 +356,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ea2b1723cca64aaa84b74bd05c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionPrefab: {fileID: 9161871501395862321, guid: 3132bdb0d1c3c244899bc3862e7b31a4, type: 3}
-  nextScreen: {fileID: 0}
   characterOptions:
   - optionsParent: {fileID: 8720132134127732480}
     options:
-    - "IT\u30FB\u30B7\u30B9\u30C6\u30E0"
-    - "\u901A\u4FE1\u30FB\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF"
-    - "\u91D1\u878D\u30FB\u6295\u8CC7"
-    - "\u7D4C\u55B6\u30FB\u30B3\u30F3\u30B5\u30EB\u30C6\u30A3\u30F3\u30B0"
-    - "\u55B6\u696D\u30FB\u8CA9\u58F2"
-    - "\u4EBA\u4E8B\u30FB\u52B4\u52D9"
-    - "\u533B\u7642\u30FB\u30D8\u30EB\u30B9\u30B1\u30A2"
-    - "\u7F8E\u5BB9\u30FB\u30A6\u30A7\u30EB\u30CD\u30B9"
-    - "\u74B0\u5883\u30FB\u30A8\u30CD\u30EB\u30AE\u30FC"
-    - "\u6CD5\u5F8B\u30FB\u6CD5\u52D9"
-    - "\u6559\u80B2\u30FB\u30C8\u30EC\u30FC\u30CB\u30F3\u30B0"
-    - "\u7814\u7A76\u30FB\u79D1\u5B66"
-    - "\u88FD\u9020\u30FB\u751F\u7523"
-    - "\u5EFA\u7BC9\u30FB\u4E0D\u52D5\u7523"
-    - "\u30E2\u30D3\u30EA\u30C6\u30A3\u30FB\u4EA4\u901A"
-    - "\u98F2\u98DF\u30FB\u30DB\u30B9\u30D4\u30BF\u30EA\u30C6\u30A3"
-    - "\u30B9\u30DD\u30FC\u30C4\u30FB\u30D5\u30A3\u30C3\u30C8\u30CD\u30B9"
-    - "\u30D5\u30A1\u30C3\u30B7\u30E7\u30F3\u30FB\u30A2\u30D1\u30EC\u30EB"
-    - "\u30A8\u30F3\u30BF\u30FC\u30C6\u30A4\u30F3\u30E1\u30F3\u30C8\u30FB\u30E1\u30C7\u30A3\u30A2"
-    - "\u30A2\u30FC\u30C8\u30FB\u30C7\u30B6\u30A4\u30F3"
-    - "\u516C\u5171\u30B5\u30FC\u30D3\u30B9\u30FB\u884C\u653F"
-    - "\u305D\u306E\u4ED6\uFF08\u5177\u4F53\u7684\u306B\u8A18\u5165\uFF09"
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
+    - type: 0
+      value: 
   OptionsForNext: 0
+--- !u!114 &593324218523760638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412446075157758163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 283b5cc367b687948a9e4be2608777c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextScreen: {fileID: 0}
 --- !u!1 &3461944423149400589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1046,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2401499455916238936}
     m_Modifications:
+    - target: {fileID: 1903936697518809858, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2531396186641029129, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1111,18 +1149,18 @@ PrefabInstance:
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2226478337273155205}
+      objectReference: {fileID: 593324218523760638}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: onNext
+      value: OnNext
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIUpdater, Assembly-CSharp
+      value: UINavigate, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
