@@ -8,14 +8,14 @@ using System.Reflection.Emit;
 
 public class UIUpdater : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject optionPrefab;
+    // [SerializeField]
+    // private GameObject optionPrefab;
 
     [SerializeField]
     private GameObject nextScreen;
 
     [SerializeField]
-    private CharacterOption[] characterOptions;
+    private CharacterOptions[] characterOptions;
 
     [SerializeField]
     private bool OptionsForNext = false;
@@ -34,26 +34,33 @@ public class UIUpdater : MonoBehaviour
 
     private void Init()
     {
-        if (characterOptions == null || characterOptions.Length == 0 || optionPrefab == null)
+        if (characterOptions == null || characterOptions.Length == 0/* || optionPrefab == null*/)
             return;
             
-        foreach(CharacterOption characterOption in characterOptions)
+        foreach(var characterOption in characterOptions)
         {
             if (characterOption.options == null || characterOption.options.Length == 0 || characterOption.optionsParent == null)
                 continue;
 
-            foreach(String option in characterOption.options)
+            foreach(var option in characterOption.options)
             {
+                var optionPrefab = UIManager.Instance.GetOptionPrefab(option.type);
+                if (optionPrefab == null)
+                {
+                    Debug.LogErrorFormat("Option Prefab Not Found: {0} {1}", option.type, option.value);
+                    continue;
+                }
+
                 GameObject optionGO = Instantiate(optionPrefab, characterOption.optionsParent);
                 TextMeshProUGUI text = optionGO.GetComponentInChildren<TextMeshProUGUI>();
                 if (text) {
-                    text.text = option;
+                    text.text = option.value;
                 }
                 // else
                 {
                     Text label = optionGO.GetComponentInChildren<Text>();
                     if (label)
-                        label.text = option;
+                        label.text = option.value;
                 }
 
                 if (OptionsForNext)
