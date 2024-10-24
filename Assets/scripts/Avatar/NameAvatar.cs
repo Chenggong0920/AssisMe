@@ -1,16 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class NameAvatar : MonoBehaviour
 {
     [SerializeField]
+    private InputField inputName;
+
+    [SerializeField]
     private RectTransform generatedNamesParent;
 
     [SerializeField]
-    private GameObject namePrefab;
+    private Toggle namePrefab;
+    [SerializeField]
+    private ToggleGroup toggleGroup;
+
+    [System.Serializable]
+    public class AvatarNameEvent : UnityEvent<string> { }
+    [SerializeField]
+    private AvatarNameEvent onAvatarNamedEvent;
 
     private List<string> names = new List<string>
     {
@@ -18,9 +28,7 @@ public class NameAvatar : MonoBehaviour
         "PQR", "STU", "VW", "XYZ"
     };
 
-    // [SerializeField]
-    // private RectTransform contents;
-    // VerticalLayoutGroup namesLayout;
+    private List<CharacterOptionsButton> optionButtons = new List<CharacterOptionsButton>();
 
     // Start is called before the first frame update
     void Start()
@@ -49,31 +57,31 @@ public class NameAvatar : MonoBehaviour
             Destroy(child.gameObject);
         }
 
+        optionButtons.Clear();
+
         foreach (string name in selectedNames)
         {
-            GameObject optionGO = Instantiate(namePrefab, generatedNamesParent);
-            TextMeshProUGUI text = optionGO.GetComponentInChildren<TextMeshProUGUI>();
-            if (text) {
-                text.text = name;
-            }
-            // else
+            var optionToggle = Instantiate(namePrefab, generatedNamesParent);
+            optionToggle.group = toggleGroup;
+            
+            var optionButton = optionToggle.gameObject.AddComponent<CharacterOptionsButton>();
+            optionButton.Init(name);
+
+            optionButtons.Add(optionButton);
+        }
+    }
+
+    public void OnNext()
+    {
+        foreach (var optionButton in optionButtons)
+        {
+            if (optionButton.IsSelectedToggle())
             {
-                Text label = optionGO.GetComponentInChildren<Text>();
-                if (label)
-                    label.text = name;
+                onAvatarNamedEvent.Invoke(optionButton.Value);
+                return;
             }
         }
 
-        // if (namesLayout == null)
-        // {
-        //     namesLayout = contents.GetComponent<VerticalLayoutGroup>();
-        //     // LayoutRebuilder.ForceRebuildLayoutImmediate(contents);
-        // }
-
-        // // if (namesLayout != null)
-        // {
-        //     // LayoutRebuilder.ForceRebuildLayoutImmediate(generatedNamesParent);
-        //     // LayoutRebuilder.ForceRebuildLayoutImmediate(contents);
-        // }
+        onAvatarNamedEvent.Invoke(inputName.text);
     }
 }

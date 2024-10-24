@@ -408,10 +408,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ButtonSigninApple
       objectReference: {fileID: 0}
-    - target: {fileID: 5617141376533150911, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
-      propertyPath: radius
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 6039138004078141160, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_SizeDelta.x
       value: -40

@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System.Reflection.Emit;
+using System.Linq;
 
 public class CharacterOptionsUI : MonoBehaviour
 {
@@ -14,13 +15,27 @@ public class CharacterOptionsUI : MonoBehaviour
     // [SerializeField]
     // private GameObject nextScreen;
 
+    // [SerializeField]
+    // private CharacterOptions[] characterOptions;
+
     [SerializeField]
-    private CharacterOptions[] characterOptions;
+    private Transform optionsParent;
+
 
     [SerializeField]
     private bool OptionsForNext = false;
 
+    [SerializeField]
+    private UserInfoType userInfoType;
+
+    [SerializeField]
+    private bool startWithNumber = false;
+    [SerializeField]
+    private bool lastOption = false;
+
     private UINavigate navigateComponent;
+
+    private List<CharacterOptionsButton> optionButtons = new List<CharacterOptionsButton>();
 
     // Start is called before the first frame update
     void Start()
@@ -32,51 +47,61 @@ public class CharacterOptionsUI : MonoBehaviour
     {
         navigateComponent = GetComponent<UINavigate>();
 
-        if (characterOptions == null || characterOptions.Length == 0/* || optionPrefab == null*/)
+        var characterOptions = Settings.Instance.GetCharacterOptions(userInfoType);
+        if (characterOptions == null || characterOptions.Length == 0)
             return;
-            
-        foreach(var characterOption in characterOptions)
+
+        foreach( var option in characterOptions)
         {
-            if (characterOption.options == null || characterOption.options.Length == 0 || characterOption.optionsParent == null)
-                continue;
-
-            foreach(var option in characterOption.options)
+            var optionPrefab = Settings.Instance.GetOptionPrefab(option.type);
+            if (optionPrefab == null)
             {
-                var optionPrefab = UIManager.Instance.GetOptionPrefab(option.type);
-                if (optionPrefab == null)
-                {
-                    Debug.LogErrorFormat("Option Prefab Not Found: {0} {1}", option.type, option.value);
-                    continue;
-                }
+                Debug.LogErrorFormat("Option Prefab Not Found: {0} {1}", option.type, option.value);
+                continue;
+            }
 
-                GameObject optionGO = Instantiate(optionPrefab, characterOption.optionsParent);
-                TextMeshProUGUI text = optionGO.GetComponentInChildren<TextMeshProUGUI>();
-                if (text) {
-                    text.text = option.value;
-                }
-                // else
-                {
-                    Text label = optionGO.GetComponentInChildren<Text>();
-                    if (label)
-                        label.text = option.value;
-                }
+            GameObject optionGO = Instantiate(optionPrefab, optionsParent);
+            var optionButton = optionGO.AddComponent<CharacterOptionsButton>();
+            optionButton.Init(option.value, startWithNumber);
 
-                if (OptionsForNext)
+            optionButtons.Add(optionButton);
+
+            if (OptionsForNext)
+            {
+                Button btnComponent = optionGO.GetComponent<Button>();
+                if (btnComponent)
                 {
-                    Button btnComponent = optionGO.GetComponent<Button>();
-                    if (btnComponent)
-                        btnComponent.onClick.AddListener(navigateComponent.OnNext);
+                    btnComponent.onClick.AddListener(() => 
+                    {
+                        onUserOptionSelected(option.value);
+                    });
                 }
             }
         }
     }
 
-    // public void onNext()
-    // {
-    //     if( !nextScreen)
-    //         return;
+    private void onUserOptionSelected(string optionValue)
+    {
+        Debug.LogFormat("Option: {0} selected for {1}", optionValue, userInfoType);
 
-    //     gameObject.SetActive(false);
-    //     nextScreen.SetActive(true);
-    // }
+        PlayerInfoManager.Instance.UpdatePlayerInfo(userInfoType, optionValue, lastOption);
+
+        if (navigateComponent)
+            navigateComponent.OnNext();
+    }
+
+    public void onNext()
+    {
+        List<string> selectedOptions = new List<string>();
+        foreach (var optionButton in optionButtons)
+        {
+            if (optionButton.IsSelectedToggle())
+            {
+                selectedOptions.Add(optionButton.Value);
+            }
+        }
+
+        var result = string.Join("・", selectedOptions);
+        onUserOptionSelected(result);
+    }
 }

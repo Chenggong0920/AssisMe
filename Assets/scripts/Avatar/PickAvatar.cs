@@ -1,23 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class AvatarDescriptionsUI : MonoBehaviour
 {
     [SerializeField]
-    private AvatarDescription avatarDescriptionPrefab;
-
-    [SerializeField]
     private Transform contentsParent;
 
+    // [SerializeField]
+    // private SerializableDictionary<AvatarType, AvatarInfo> avatarInfos;
     [SerializeField]
-    private SerializableDictionary<AvatarType, AvatarInfo> avatarInfos;
+    private int childIndexOffset = 0;
+
+    [SerializeField]
+    private bool createToggles = false;
 
 
     private AudioSource audioSourceComponent;
     private UINavigate navigateComponent;
 
-    private void Awake()
+    [System.Serializable]
+    public class AvatarPickEvent : UnityEvent<AvatarType> { }
+    [SerializeField]
+    private AvatarPickEvent onAvatarPickedEvent;
+    private ToggleGroup toggleGroup;
+
+    private void Start()
     {
         Init();    
     }
@@ -26,16 +37,43 @@ public class AvatarDescriptionsUI : MonoBehaviour
     {
         navigateComponent = GetComponent<UINavigate>();
 
+        var avatarDescriptionPrefab = createToggles? Settings.Instance.AvatarDescription_Toggle_Prefab
+                                                    : Settings.Instance.AvatarDescription_Button_Prefab;
+
         if (avatarDescriptionPrefab == null)
             return;
 
-        foreach(SerializableKeyValuePair<AvatarType, AvatarInfo> info in avatarInfos.KeyValuePairs)
+        if (createToggles)
+        {
+            toggleGroup = gameObject.AddComponent<ToggleGroup>();
+            toggleGroup.allowSwitchOff = false;
+        }
+
+        int index = 0;
+        foreach(SerializableKeyValuePair<AvatarType, AvatarInfo> info in Settings.Instance.AvatarInfos.KeyValuePairs)
         {
             var descriptionGO = Instantiate(avatarDescriptionPrefab, contentsParent);
             descriptionGO.Initialize(info.Key, info.Value);
 
-            descriptionGO.OnAvatarPicked += OnAvatarPicked;
-            descriptionGO.OnSoundClicked += OnSoundClicked;
+            if (childIndexOffset > 0)
+            {
+                descriptionGO.transform.SetSiblingIndex(childIndexOffset + index ++);
+            }
+
+            if (info.Value.icon)
+            {
+                descriptionGO.OnAvatarPicked += OnAvatarPicked;
+                descriptionGO.OnSoundClicked += OnSoundClicked;
+            }
+
+            if (createToggles)
+            {
+                var toggleComponent = descriptionGO.GetComponent<Toggle>();
+                toggleComponent.group = toggleGroup;
+
+                if (info.Key == PlayerInfoManager.Instance.AvatarType)
+                    toggleComponent.isOn = true;
+            }
         }
 
         audioSourceComponent = GetComponent<AudioSource>();
@@ -45,15 +83,21 @@ public class AvatarDescriptionsUI : MonoBehaviour
     {
         Debug.LogFormat("Avatar Picked: {0}", type);
 
-        navigateComponent.OnNext();
+        // update avatar
+        onAvatarPickedEvent.Invoke(type);
+
+        // go for next
+        if (navigateComponent)
+            navigateComponent.OnNext();
     }
 
     private void OnSoundClicked(AvatarType type)
     {
         Debug.LogFormat("Sound Clicked: {0}", type);
-        if (avatarInfos.ContainsKey(type))
+        var avatarInfo = Settings.Instance.GetAvatarInfo(type);
+        if (avatarInfo != null)
         {
-            var sound = avatarInfos.Get(type).voice;
+            var sound = avatarInfo?.voice;
             audioSourceComponent.PlayOneShot(sound);
         }
     }

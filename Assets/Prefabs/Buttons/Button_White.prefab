@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30B9\u30BF\u30FC\u30C8"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 24859aa71d64733408f714e90198f988, type: 2}
-  m_sharedMaterial: {fileID: -5550416169212926948, guid: 24859aa71d64733408f714e90198f988, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 405270d779b20c4428101969a18f0b6a, type: 2}
+  m_sharedMaterial: {fileID: -4308706723065682239, guid: 405270d779b20c4428101969a18f0b6a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 42
+  m_fontSizeBase: 42
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -268,5 +268,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb30198aa32dd140b5750692dd48104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 90
+  radius: 75
   image: {fileID: 1903936697518809858}

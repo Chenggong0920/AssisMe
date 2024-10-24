@@ -4,5 +4,5 @@ using System;
 public struct CharacterOption
 {
     public OptionType type;
-    public String value;
+    public string value;
 }

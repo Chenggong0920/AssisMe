@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/FirstScreen.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: 2331668efdf89b9418fec1551a1a1fec
+  - enabled: 1
+    path: Assets/Scenes/TextChat.unity
+    guid: 528b882ead1de0845a3950f386a240b9
+  - enabled: 1
+    path: Assets/Scenes/Reminders.unity
+    guid: f18144bbbdca0574680e4a16724def49
+  - enabled: 1
+    path: Assets/Scenes/MyPage.unity
+    guid: 32cac17676f5c564e9ed1bd9cad7eb93
   m_configObjects: {}

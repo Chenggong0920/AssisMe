@@ -356,54 +356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9ea2b1723cca64aaa84b74bd05c0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterOptions:
-  - optionsParent: {fileID: 8720132134127732480}
-    options:
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
-    - type: 0
-      value: 
+  optionsParent: {fileID: 8720132134127732480}
   OptionsForNext: 0
+  userInfoType: 0
+  startWithNumber: 0
 --- !u!114 &593324218523760638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1136,7 +1092,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5524220139564802486, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Button_Next
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1149,18 +1105,18 @@ PrefabInstance:
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 593324218523760638}
+      objectReference: {fileID: 2226478337273155205}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnNext
+      value: onNext
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UINavigate, Assembly-CSharp
+      value: CharacterOptionsUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
