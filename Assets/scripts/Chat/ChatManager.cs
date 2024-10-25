@@ -51,7 +51,7 @@ public class ChatManager : MonoBehaviour
             byte[] imageData = File.ReadAllBytes(path);
             texture.LoadImage(imageData); // Automatically resizes the texture
 #else
-            texture = NativeGallery.LoadImageAtPath( path, maxSize );
+            texture = NativeGallery.LoadImageAtPath( path, 512 );
 			if( texture == null )
 			{
 				Debug.Log( "Couldn't load texture from " + path );
