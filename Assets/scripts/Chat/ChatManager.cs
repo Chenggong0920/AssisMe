@@ -45,9 +45,19 @@ public class ChatManager : MonoBehaviour
         Debug.LogFormat("OnSendPlayerImage {0}", path);
         if (File.Exists(path))
         {
+            Texture2D texture = null;
+#if UNITY_EDITOR
+            texture = new Texture2D(2, 2);
             byte[] imageData = File.ReadAllBytes(path);
-            Texture2D texture = new Texture2D(2, 2);
             texture.LoadImage(imageData); // Automatically resizes the texture
+#else
+            texture = NativeGallery.LoadImageAtPath( path, maxSize );
+			if( texture == null )
+			{
+				Debug.Log( "Couldn't load texture from " + path );
+				return;
+			}
+#endif
 
             Debug.Log("Load Image Success");
 
@@ -102,15 +112,18 @@ public class ChatManager : MonoBehaviour
         var path = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg,bmp");
         onFilePicked(path);
 #else
-        if (NativeFilePicker.IsFilePickerBusy())
+        // if (NativeFilePicker.IsFilePickerBusy())
+        if (NativeGallery.IsMediaPickerBusy())
 			onFilePicked.Invoke(null);
 
-        var extensions = new string[]{"png", "jpg", "jpeg", "bmp"};
-        for(var i = 0; i < extensions.Length; i ++)
-        {
-            extensions[i] = NativeFilePicker.ConvertExtensionToFileType(extensions[i]);
-        }
-        NativeFilePicker.Permission permission = NativeFilePicker.PickFile( ( path ) =>
+        // var extensions = new string[]{"png", "jpg", "jpeg", "bmp"};
+        // for(var i = 0; i < extensions.Length; i ++)
+        // {
+        //     extensions[i] = NativeFilePicker.ConvertExtensionToFileType(extensions[i]);
+        // }
+
+        // NativeFilePicker.Permission permission = NativeFilePicker.PickFile( ( path ) =>
+        NativeGallery.Permission permission = NativeGallery.GetImageFromGallery( ( path ) =>
         {
             if( path == null )
             {
@@ -122,7 +135,7 @@ public class ChatManager : MonoBehaviour
                 Debug.Log( "Picked file: " + path );
                 onFilePicked.Invoke(path);
             }
-        }, extensions);
+        }/*, extensions*/);
 
         Debug.Log( "Permission result: " + permission );
 #endif
