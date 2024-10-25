@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,16 +42,25 @@ public class ChatManager : MonoBehaviour
 
     private void OnSendPlayerImage(string path)
     {
+        Debug.LogFormat("OnSendPlayerImage {0}", path);
         if (File.Exists(path))
         {
             byte[] imageData = File.ReadAllBytes(path);
             Texture2D texture = new Texture2D(2, 2);
             texture.LoadImage(imageData); // Automatically resizes the texture
 
+            Debug.Log("Load Image Success");
+
             PlayerChat playerChat = Instantiate(playerChatPrefab, chatHistoryParent);
             playerChat.Init(texture);
 
+            Debug.Log("Instantiated Prefab");
+
             UpdateContentSizeFitter(playerChat.GetComponent<RectTransform>());
+        }
+        else
+        {
+            Debug.LogError("File path does not exist");
         }
     }
 
@@ -73,29 +83,49 @@ public class ChatManager : MonoBehaviour
 
     public void OnUploadImageClicked()
     {
-        string path = OpenFileBrowser();
-        if (!string.IsNullOrEmpty(path))
+        PickImageFile((pickedFilePath) =>
         {
-            OnSendPlayerImage(path);
-        }
+            if (!string.IsNullOrEmpty(pickedFilePath))
+            {
+                OnSendPlayerImage(pickedFilePath);
+            }
+            else
+            {
+                Debug.LogFormat("No file was selected");
+            }
+        });
     }
 
-    string OpenFileBrowser()
+    void PickImageFile(Action<string> onFilePicked)
     {
-        string filePath = null;
 #if UNITY_EDITOR
-        filePath = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg,bmp");
+        var path = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg,bmp");
+        onFilePicked(path);
 #else
-        // var pngFileType = NativeFilePicker.ConvertExtensionToFileType( "png" );
-        // var jpgFileType = NativeFilePicker.ConvertExtensionToFileType( "jpg" );
-        // var jpegFileType = NativeFilePicker.ConvertExtensionToFileType( "jpeg" );
-        // var bmpFileType = NativeFilePicker.ConvertExtensionToFileType( "bmp" );
-        NativeFilePicker.PickFile((path) =>
+        if (NativeFilePicker.IsFilePickerBusy())
+			onFilePicked.Invoke(null);
+
+        var extensions = new string[]{"png", "jpg", "jpeg", "bmp"};
+        for(var i = 0; i < extensions.Length; i ++)
         {
-            filePath = path;
-        }, "png,jpg,jpeg,bmp");
+            extensions[i] = NativeFilePicker.ConvertExtensionToFileType(extensions[i]);
+        }
+        NativeFilePicker.Permission permission = NativeFilePicker.PickFile( ( path ) =>
+        {
+            if( path == null )
+            {
+                Debug.Log( "Operation cancelled" );
+                onFilePicked.Invoke(null);
+            }
+            else
+            {
+                Debug.Log( "Picked file: " + path );
+                onFilePicked.Invoke(path);
+            }
+        }, extensions);
+
+        Debug.Log( "Permission result: " + permission );
 #endif
-        return filePath; // Note: filePath will be set asynchronously
     }
 
     private void UpdateContentSizeFitter(RectTransform transform, bool scrollToBottom = true)

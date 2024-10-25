@@ -36,8 +36,8 @@ public class PlayerChat : MonoBehaviour
         Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         image.sprite = sprite;
 
-        Vector2 size = imageTransform.sizeDelta;
-        imageTransform.sizeDelta = new Vector2(Mathf.Min(size.x, texture.width), size.y);
+        // Vector2 size = imageTransform.sizeDelta;
+        // imageTransform.sizeDelta = new Vector2(Mathf.Min(size.x, texture.width), size.y);
 
         if (aspectRatioFitter)
         {
