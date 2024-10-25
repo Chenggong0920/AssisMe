@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 [System.Serializable]
 public struct UserInfo
 {
@@ -10,6 +12,22 @@ public struct UserInfo
     public string Health;
     public string Hobby;
     public string Help;
+
+    public static UserInfo CreateDefault()
+    {
+        return new UserInfo
+        {
+            Nickname = string.Empty,
+            Gender = string.Empty,
+            Age = string.Empty,
+            Occupation = string.Empty,
+            Major = string.Empty,
+            Future = string.Empty,
+            Health = string.Empty,
+            Hobby = string.Empty,
+            Help = string.Empty
+        };
+    }
 
     public bool Equals(UserInfo other)
     {
@@ -26,6 +44,6 @@ public struct UserInfo
 
     public bool isEmpty()
     {
-        return this.Equals(new UserInfo());
+        return this.Equals(CreateDefault());
     }
 }
