@@ -86,10 +86,13 @@ public class ChatManager : MonoBehaviour
 #if UNITY_EDITOR
         filePath = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg,bmp");
 #elif UNITY_IOS
+        // var pngFileType = NativeFilePicker.ConvertExtensionToFileType( "png" );
+        // var jpgFileType = NativeFilePicker.ConvertExtensionToFileType( "jpg" );
+        // var jpegFileType = NativeFilePicker.ConvertExtensionToFileType( "jpeg" );
+        // var bmpFileType = NativeFilePicker.ConvertExtensionToFileType( "bmp" );
         NativeFilePicker.PickFile((path) =>
         {
             filePath = path;
-            LoadImage(filePath); // Call LoadImage here if a file is selected
         }, "png,jpg,jpeg,bmp");
 #endif
         return filePath; // Note: filePath will be set asynchronously
