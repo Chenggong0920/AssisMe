@@ -42,7 +42,7 @@ public class UpdateAvatar : MonoBehaviour
         if (PlayerInfoManager.Instance == null)
             return;
 
-        PlayerInfoManager.Instance.UpdateAvatarInfo(avatarType, false);
+        PlayerInfoManager.Instance.UpdateAvatarInfo(avatarType);
         PlayerInfoManager.Instance.UpdateAvatarInfo(avatarName.text);
     }
 }
