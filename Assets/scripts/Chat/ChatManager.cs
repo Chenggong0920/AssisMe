@@ -85,7 +85,7 @@ public class ChatManager : MonoBehaviour
         string filePath = null;
 #if UNITY_EDITOR
         filePath = EditorUtility.OpenFilePanel("Select Image", "", "png,jpg,jpeg,bmp");
-#elif UNITY_IOS
+#else
         // var pngFileType = NativeFilePicker.ConvertExtensionToFileType( "png" );
         // var jpgFileType = NativeFilePicker.ConvertExtensionToFileType( "jpg" );
         // var jpegFileType = NativeFilePicker.ConvertExtensionToFileType( "jpeg" );
