@@ -10,8 +10,8 @@ public class UpdateAvatar : MonoBehaviour
 
     private AvatarType avatarType;
 
-    [SerializeField]
-    private AvatarDescriptionsUI pickAvatarComponent;
+    // [SerializeField]
+    // private AvatarDescriptionsUI pickAvatarComponent;
 
     // Start is called before the first frame update
     void Start()

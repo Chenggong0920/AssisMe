@@ -46,4 +46,59 @@ public struct UserInfo
     {
         return this.Equals(CreateDefault());
     }
+
+    public string GetValue(UserInfoType userInfoType)
+    {
+        switch (userInfoType)
+        {
+            case UserInfoType.Gender:
+                return Gender;
+            case UserInfoType.Age:
+                return Age;
+            case UserInfoType.Occupation:
+                return Occupation;
+            case UserInfoType.Major:
+                return Major;
+            case UserInfoType.Future:
+                return Future;
+            case UserInfoType.Health:
+                return Health;
+            case UserInfoType.Hobby:
+                return Hobby;
+            case UserInfoType.Help:
+                return Help;
+        }
+        return "";
+    }
+
+    public void SetValue(UserInfoType userInfoType, string value)
+    {
+        switch (userInfoType)
+        {
+            case UserInfoType.Gender:
+                Gender = value;
+                break;
+            case UserInfoType.Age:
+                Age = value;
+                break;
+            case UserInfoType.Occupation:
+                Occupation = value;
+                break;
+            case UserInfoType.Major:
+                Major = value;
+                break;
+            case UserInfoType.Future:
+                Future = value;
+                break;
+            case UserInfoType.Health:
+                Health = value;
+                break;
+            case UserInfoType.Hobby:
+                Hobby = value;
+                break;
+            case UserInfoType.Help:
+                Help = value;
+                break;
+        }
+    }
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class CharacterOptionsButton : MonoBehaviour
 {
-    private string value;
+    protected string value;
     public string Value
     {
         get => value;
