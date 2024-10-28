@@ -22,6 +22,11 @@ public class MyPage : MonoBehaviour
     private GameObject updateInfoScreen;
     [SerializeField]
     private GameObject updateAvatarScreen;
+    [SerializeField]
+    private GameObject purchaseScreen;
+
+    [SerializeField]
+    private GameObject homeButton;
 
     // Start is called before the first frame update
     void Start()
@@ -29,16 +34,24 @@ public class MyPage : MonoBehaviour
         Init();
     }
 
-    private void Init()
-    {
-        UpdatePoints(90, 20);
+    private void OnDestroy() {
+        TokenManager.Instance.OnTokenAmountUpdated -= UpdatePoints;
     }
 
-    private void UpdatePoints(int additional, int used)
+    private void Init()
     {
+        TokenManager.Instance.OnTokenAmountUpdated += UpdatePoints;
+
+        UpdatePoints();
+    }
+
+    private void UpdatePoints()
+    {
+        int additional = 90;
+        int used = 20;
         int remaining = additional - used;
-        remainingPoints.text = string.Format("利用可能\n<size=100>{0}</size> トークン", remaining);
-        additionalPoints.text = string.Format("追加分<size=66>\n{0}</size>トークン", additional);
+        remainingPoints.text = string.Format("利用可能\n<size=100>{0}</size> トークン", TokenManager.Instance.RemainingTokens);
+        additionalPoints.text = string.Format("追加分\n<size=66>{0}</size>トークン", additional);
         usedPoints.text = string.Format("利用分\n<size=66>{0}</size>トークン", used);
 
         sliderPoints.value = (float)remaining / additional;
@@ -52,7 +65,8 @@ public class MyPage : MonoBehaviour
 
     public void OnPurchaseToken()
     {
-
+        homeButton.SetActive(false);
+        purchaseScreen.SetActive(true);
     }
 
     public void OnUpdateInfo()
