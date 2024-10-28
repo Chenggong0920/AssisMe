@@ -956,6 +956,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_Next
       objectReference: {fileID: 0}
+    - target: {fileID: 5617141376533150911, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
+      propertyPath: radius
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8152876272877237600, guid: bf2569ffc0951404d8d5fd10a8864530, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
